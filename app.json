@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "OSC",
+    "slug": "OSC",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/oscLogo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/oscLogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lotzofhackz.USC"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/oscLogo.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.lotzofhackz.USC"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "53d9674e-8464-4b11-84ed-80aca53a459e"
+      }
+    },
+    "plugins": [
+      "expo-video"
+    ]
+  }
+}

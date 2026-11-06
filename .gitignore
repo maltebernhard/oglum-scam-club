@@ -1,0 +1,68 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Android generated files and local configuration
+android/.gradle/
+android/.kotlin/
+android/build/
+android/app/build/
+android/local.properties
+
+# iOS generated files
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/**/xcuserdata/
+*.xcuserstate
+
+# General build and test output
+coverage/
+*.log
+
+# Unused/unreferenced source assets (not needed to build or run the app)
+android/release-build.init.gradle
+assets/Wellpass.xcf
+assets/newVideo.mp4
+assets/trimmedVideo.mp4
+assets/wellpass.jpg
+assets/Wellpass_Logo_RGB_EGYM-Wellpass-Black-Color.png
