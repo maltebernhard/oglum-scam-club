@@ -54,8 +54,13 @@ node tools/build.mjs
 
 The build writes:
 
-- `wellpass.html` - a self-contained, online-only single-file app
-- `dist/` - the full PWA deployment directory
+- `wellpass.html` - a self-contained single-file app; `dist/index.html` is the identical file
+- `dist/` - the PWA deployment directory (adds `sw.js` for offline use, plus manifest and icons)
+
+Both HTML files are fully standalone: the icons are embedded and the web app
+manifest is generated at runtime from the page's own URL. Uploading only
+`index.html` to any HTTPS host is enough to install it from the browser; the
+service worker (offline use) is only active when `sw.js` is hosted next to it.
 
 Check whether the single-file build is current without writing files:
 

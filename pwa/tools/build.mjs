@@ -29,17 +29,22 @@ const MODULES = [
 
 const dataUri = (file) => `data:image/png;base64,${fs.readFileSync(path.join(web, 'icons', file)).toString('base64')}`
 
-export function buildHtml({ manifest = false } = {}) {
+export function buildHtml() {
   const modules = {}
   for (const name of MODULES) modules[name] = fs.readFileSync(path.join(web, 'src', name), 'utf8')
   // The original file escapes "</" so the JSON can never close its <script> tag.
   const json = JSON.stringify(modules).replace(/<\//g, '<\\/')
   const icons = `<link rel="icon" type="image/png" href="${dataUri('favicon-64.png')}" />\n    <link rel="apple-touch-icon" href="${dataUri('apple-touch-icon.png')}" />`
+  const manifestIcons = JSON.stringify([
+    { src: dataUri('icon-192.png'), sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: dataUri('icon-512.png'), sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: dataUri('icon-maskable-512.png'), sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+  ])
   const shell = fs.readFileSync(path.join(web, 'shell.html'), 'utf8')
   const style = fs.readFileSync(path.join(web, 'style.css'), 'utf8')
   return shell
     .replace('@@ICONS@@', () => icons)
-    .replace('@@MANIFEST@@', () => (manifest ? '<link rel="manifest" href="manifest.webmanifest" />' : ''))
+    .replace('@@MANIFEST_ICONS@@', () => manifestIcons)
     .replace('@@STYLE@@', () => style)
     .replace('@@MODULES@@', () => json)
 }
@@ -67,6 +72,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(same ? 0 : 1)
   }
   fs.writeFileSync(target, single)
-  const version = buildDist(buildHtml({ manifest: true }))
+  const version = buildDist(single)
   console.log(`wrote wellpass.html (${(single.length / 1024).toFixed(1)} KB) and dist/ (cache osc-${version})`)
 }

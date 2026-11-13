@@ -11,7 +11,32 @@
     <meta name="apple-mobile-web-app-title" content="OSC" />
     <title>Oglum Scam Club</title>
     @@ICONS@@
-    @@MANIFEST@@
+    <script>
+      // The page installs on its own: the manifest is built at runtime (absolute URLs need the real
+      // address) and icons are embedded, so index.html works without any sibling file.
+      (function () {
+        if (!/^https?:$/.test(location.protocol)) return
+        var start = location.origin + location.pathname
+        var manifest = {
+          name: 'Oglum Scam Club',
+          short_name: 'OSC',
+          description: 'WellPass check-in screen that runs locally on your phone.',
+          lang: 'en',
+          id: start,
+          start_url: start,
+          scope: start.slice(0, start.lastIndexOf('/') + 1),
+          display: 'standalone',
+          orientation: 'portrait',
+          background_color: '#060404',
+          theme_color: '#f2f3f4',
+          icons: @@MANIFEST_ICONS@@
+        }
+        var link = document.createElement('link')
+        link.rel = 'manifest'
+        link.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' }))
+        document.head.appendChild(link)
+      })()
+    </script>
     <style>@@STYLE@@</style>
   </head>
   <body>

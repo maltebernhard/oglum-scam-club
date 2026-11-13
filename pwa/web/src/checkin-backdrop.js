@@ -23,10 +23,18 @@ const derivPoly = (coeffs, x) => {
   return coeffs.slice(0, -1).reduce((acc, c, i) => acc * x + c * (n - i), 0)
 }
 
-function edgeY(coeffs, x) {
+// Right of the stage the fitted lower edge would flatten and cross the upper one, so it eases from its own
+// slope into the upper edge's slope over RAMP stage widths and then runs parallel to it.
+const RAMP = 0.15
+const LOWER_TAIL_SLOPE = derivPoly(UPPER, 1)
+
+function edgeY(coeffs, x, tailSlope = derivPoly(coeffs, 1)) {
   if (x >= 0 && x <= 1) return evalPoly(coeffs, x)
-  const edge = x < 0 ? 0 : 1
-  return evalPoly(coeffs, edge) + derivPoly(coeffs, edge) * (x - edge)
+  if (x < 0) return evalPoly(coeffs, 0) + derivPoly(coeffs, 0) * x
+  const slope = derivPoly(coeffs, 1)
+  const t = x - 1
+  const eased = Math.min(t, RAMP)
+  return evalPoly(coeffs, 1) + slope * eased + ((tailSlope - slope) * eased * eased) / (2 * RAMP) + tailSlope * (t - eased)
 }
 
 function bandPath() {
@@ -34,9 +42,9 @@ function bandPath() {
   const to = 2.5
   const steps = 64
   const xs = Array.from({ length: steps + 1 }, (_, i) => from + ((to - from) * i) / steps)
-  const point = (coeffs, x) => `${(x * W).toFixed(1)} ${(edgeY(coeffs, x) * H).toFixed(1)}`
+  const point = (coeffs, x, tailSlope) => `${(x * W).toFixed(1)} ${(edgeY(coeffs, x, tailSlope) * H).toFixed(1)}`
   const upper = xs.map((x) => point(UPPER, x))
-  const lower = xs.map((x) => point(LOWER, x)).reverse()
+  const lower = xs.map((x) => point(LOWER, x, LOWER_TAIL_SLOPE)).reverse()
   return `M${upper.join('L')}L${lower.join('L')}Z`
 }
 

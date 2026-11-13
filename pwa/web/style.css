@@ -173,11 +173,13 @@ button {
 }
 
 .home-header {
-  padding-top: 4px;
+  padding-top: 42px;
+  padding-bottom: 10px;
   min-height: 44px;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
 }
 
 .home-title {
@@ -190,7 +192,7 @@ button {
 }
 
 .home-subtitle {
-  margin: 2px 0 0;
+  margin: 4px 0 0;
   font-size: 13.5px;
   line-height: 1.2;
   color: var(--meta-grey);
