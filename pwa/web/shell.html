@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f2f3f4" />
+    <meta name="description" content="Oglum Scam Club — WellPass check-in, runs locally on your phone" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="OSC" />
+    <title>Oglum Scam Club</title>
+    @@ICONS@@
+    @@MANIFEST@@
+    <style>@@STYLE@@</style>
+  </head>
+  <body>
+    <main id="root"></main>
+
+  <script id="wp-modules" type="application/json">@@MODULES@@</script>
+  <script>
+    // No server here: modules are served from Blob URLs and routes live in the hash.
+    (function () {
+      var sources = JSON.parse(document.getElementById('wp-modules').textContent)
+      var urls = {}
+      function resolve(from, spec) {
+        var parts = from.split('/')
+        parts.pop()
+        spec.split('/').forEach(function (part) {
+          if (part === '.' || part === '') return
+          if (part === '..') parts.pop()
+          else parts.push(part)
+        })
+        return parts.join('/')
+      }
+      function url(name) {
+        if (urls[name]) return urls[name]
+        var body = sources[name]
+        if (body == null) throw new Error('Module missing: ' + name)
+        body = body.replace(/from\s+'([^']+)'/g, function (_, spec) {
+          return "from '" + url(resolve(name, spec)) + "'"
+        })
+        return (urls[name] = URL.createObjectURL(new Blob([body], { type: 'text/javascript' })))
+      }
+      window.__WELLPASS_SINGLE_FILE__ = true
+      import(url('main.js')).catch(function (error) {
+        console.error(error)
+        document.getElementById('root').textContent =
+          'App could not be loaded: ' + (error && error.message ? error.message : error)
+      })
+    })()
+  </script>
+  </body>
+</html>
