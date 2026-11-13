@@ -9,6 +9,8 @@ import { platform } from '../transition.js'
 
 let state = null
 
+// Selected on first launch, when no studio has been chosen yet.
+const DEFAULT_STUDIO_ID = 'seegut-blaue-blume'
 function params() {
   return new URLSearchParams(location.search)
 }
@@ -21,8 +23,9 @@ function clearLocationIfSelected(studio) {
 }
 
 function restoreLastLocation() {
-  const studio = studioStore.studio(Profile.locationID)
+  const studio = studioStore.studio(Profile.locationID) ?? studioStore.studio(DEFAULT_STUDIO_ID)
   if (!studio) return
+  if (Profile.locationID !== studio.id) Profile.locationID = studio.id
   if (Profile.location !== studio.name || Profile.category !== studio.normalizedCategory()) {
     Profile.location = studio.name
     Profile.category = studio.normalizedCategory()
@@ -75,8 +78,8 @@ function cardMarkup() {
   return `
     <header class="home-header">
       <div>
-        <h1 class="home-title">Wellpass</h1>
-        <p class="home-subtitle">Prepare your check-in</p>
+        <h1 class="home-title">Oglum Scam Club</h1>
+        <p class="home-subtitle">All Gainz No Brainz</p>
       </div>
     </header>
 
@@ -147,7 +150,7 @@ export function mount(root, { navigate } = {}) {
   const chromeParam = params().get('chrome')
   section.innerHTML = `${chromeParam === '0' ? '<div class="chrome-spacer" aria-hidden="true"></div>' : ''}
     <div class="home-scroll">${cardMarkup()}</div>
-    <input id="selfie-input" type="file" accept="image/*" capture="user" hidden />`
+    <input id="selfie-input" type="file" accept="image/*" hidden />`
   root.append(section)
 
   const refs = {

@@ -27,6 +27,7 @@ const TYPE_TO_CATEGORY = {
   PHYSIO: 'Physio',
   CROSSFIT: 'CrossFit',
   BOULDER_HALL: 'Bouldering',
+  FEVERDREAM: 'Fever Dream',
 }
 
 const fold = (value) => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()

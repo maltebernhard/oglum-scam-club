@@ -1163,7 +1163,7 @@ dialog {
 /* Two linear expand-and-fade pulses (400 ms each), then an 800 ms pause; 1600 ms loop. Same stops as the
    Pulse interpolation: scale 1→S / 1→S / 1, opacity .5→0 / 1→0 / .5. */
 .ci-pulse {
-  background: #20755e;
+  background: #1e7048;
   opacity: 0.5;
   will-change: transform, opacity;
   animation: ci-pulse 1600ms linear infinite;
@@ -1196,8 +1196,10 @@ dialog {
   position: absolute;
   left: 0;
   right: 0;
-  margin: 0;
-  padding: 0 4%;
+  /* Vertical padding (cancelled by the negative margin) keeps descenders such as "g" inside the box that
+     overflow:hidden clips to. */
+  margin: -0.25em 0 0;
+  padding: 0.25em 4%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

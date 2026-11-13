@@ -16,6 +16,7 @@ export const ALL = [
   'Racket',
   'Water Sports',
   'Cycling',
+  'Fever Dream',
   'Other',
 ]
 
@@ -60,6 +61,7 @@ export const SYMBOLS = {
   Racket: 'racket',
   'Water Sports': 'paddle',
   Cycling: 'bike',
+  'Fever Dream': 'sparkles',
   Other: 'map-pin',
 }
 

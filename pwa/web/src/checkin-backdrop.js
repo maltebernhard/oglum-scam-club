@@ -48,7 +48,7 @@ function text({ value, x, y, size, length, weight, fill, spacing = 0 }) {
     textLength="${length}" lengthAdjust="spacing">${escapeXml(value)}</text>`
 }
 
-export function backdropMarkup({ title = 'Check-in', headline = 'Session Validated' } = {}) {
+export function backdropMarkup({ title = 'Check-in', headline = 'Session validated' } = {}) {
   const card = `x="${CARD.x}" y="${CARD.y}" width="${CARD.w}" height="${CARD.h}" rx="${CARD.r}" ry="${CARD.r}"`
   return `
     <svg class="ci-bg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
@@ -68,7 +68,7 @@ export function backdropMarkup({ title = 'Check-in', headline = 'Session Validat
       </g>
       <path d="M388 295 L346 335 L388 375" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
       ${text({ value: title, x: 941, y: 357, size: 68, length: 290, weight: 600, fill: '#111' })}
-      ${text({ value: headline, x: 467, y: 1073, size: 153, length: 1237, weight: 600, fill: '#094450' })}
+      ${text({ value: headline, x: 529, y: 1111, size: 138, length: 1113, weight: 600, fill: '#094450' })}
       ${text({ value: 'EGYM', x: 943, y: 3565, size: 66, length: 297, weight: 600, fill: '#1a1a1a' })}
       ${text({ value: 'WELLPASS', x: 740, y: 3684, size: 101, length: 701, weight: 400, fill: '#1a1a1a' })}
     </svg>`

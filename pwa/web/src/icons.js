@@ -15,6 +15,7 @@ const ICONS = {
   racket: '<ellipse cx="10" cy="8.8" rx="4.8" ry="5.8"/><path d="m13.4 13.2 5.4 5.4"/><path d="M7.6 6.6h4.8M7 9.8h5.8"/>',
   paddle: '<path d="M2.8 17.4c2 1.5 4 1.5 6 0s4-1.5 6 0 3.9 1.5 5.4.2"/><path d="M12 3.2v9.6"/><path d="m9.8 5.4 2.2-2.2 2.2 2.2"/>',
   bike: '<circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="M9.2 17h4.6l-2-6H9M11.8 11l3 6M13.9 8h2.8"/>',
+  sparkles: '<path d="M10 3l1.9 5.1L17 10l-5.1 1.9L10 17l-1.9-5.1L3 10l5.1-1.9Z"/><path d="M18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9Z"/>',
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
   // iOS share sheet: arrow out of the box.
   share: '<path d="M12 3.4v10.6"/><path d="m8.4 7 3.6-3.6L15.6 7"/><path d="M7.4 10.6H4.8V20.6h14.4V10.6h-2.6"/>',

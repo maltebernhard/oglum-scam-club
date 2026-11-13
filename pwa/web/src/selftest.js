@@ -4,8 +4,8 @@ import { studioStore, historyStore, readString, CUSTOM_KEY, HISTORY_KEY } from '
 import { loadSelfie, selfieDecodes } from './selfie.js'
 import { formatTimestamp, stripCitySuffix, mapsUrl } from './format.js'
 
-const SEED_TOTAL = 981
-const SEED_WITH_COORDS = 890
+const SEED_TOTAL = 982
+const SEED_WITH_COORDS = 891
 
 export async function runSelfTest({ keep = false } = {}) {
   const lines = []
@@ -18,13 +18,13 @@ export async function runSelfTest({ keep = false } = {}) {
   const seedCount = seedStudios.length
   const inCity = (city) => seedStudios.filter((studio) => studio.city === city).length
   check(`seed count == ${SEED_TOTAL}`, seedCount === SEED_TOTAL, String(seedCount))
-  check('Berlin 730 / Potsdam 41 / Köln 41 / Düsseldorf 50', inCity('Berlin') === 730 && inCity('Potsdam') === 41 && inCity('Köln') === 41 && inCity('Düsseldorf') === 50)
+  check('Berlin 731 / Potsdam 41 / Köln 41 / Düsseldorf 50', inCity('Berlin') === 731 && inCity('Potsdam') === 41 && inCity('Köln') === 41 && inCity('Düsseldorf') === 50)
   check('unique ids', new Set(store.studios.map((studio) => studio.id)).size === store.studios.length)
   check('every category is known', seedStudios.every((studio) => ALL.includes(studio.normalizedCategory())))
   check(`${SEED_WITH_COORDS} studios have coordinates`, seedStudios.filter((studio) => mapsUrl(studio)).length === SEED_WITH_COORDS)
   check('Köln has no maps link', seedStudios.filter((studio) => studio.city === 'Köln').every((studio) => mapsUrl(studio) === null))
 
-  check('15 English categories', ALL.length === 15 && !ALL.includes('USC'))
+  check('16 English categories', ALL.length === 16 && !ALL.includes('USC'))
   check('Fitnessstudio -> Fitness', normalize('Fitnessstudio') === 'Fitness')
   check('legacy German labels map', normalize('Kampfsport') === 'Martial Arts' && normalize('Tanz') === 'Dance' && normalize('Bouldern') === 'Bouldering' && normalize('Wassersport') === 'Water Sports' && normalize('Sonstiges') === 'Other')
   check('normalize keeps Wellness', normalize('wellness') === 'Wellness')

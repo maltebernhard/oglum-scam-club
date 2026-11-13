@@ -1,6 +1,17 @@
 {
   "locations": [
     {
+      "name": "Seegut Blaue Blume",
+      "studioType": "FEVERDREAM",
+      "address": {
+        "city": "Berlin"
+      },
+      "coordinates": {
+        "latitude": 53.18264,
+        "longitude": 13.3244
+      }
+    },
+    {
       "name": "Berlin Running Society Berlin",
       "studioType": "OUTDOOR",
       "address": {
